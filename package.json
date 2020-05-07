@@ -1,0 +1,21 @@
+{
+  "name": "set-interval-visible",
+  "version": "1.0.0",
+  "description": "Run a setInterval that temporarily pauses when the page is not visible.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamschwartz/set-interval-visible.git"
+  },
+  "keywords": [
+    "setInterval",
+    "requestAnimationFrame",
+    "visible"
+  ],
+  "author": "Adam Schwartz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adamschwartz/set-interval-visible/issues"
+  },
+  "homepage": "https://github.com/adamschwartz/set-interval-visible#readme"
+}
