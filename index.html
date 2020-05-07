@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" is-fullscreen>
+<meta charset="utf-8">
+<title>setIntervalVisible test</title>
+<meta name="viewport" content="initial-scale=1, width=device-width">
+
+<script src="https://unpkg.com/focus-visible-polyfill"></script>
+<link rel="stylesheet" href="
+  https://ui.components.workers.dev/
+    ?components=
+      Button,
+      Stack
+    &helpers=
+      is-fullscreen
+    &--font-family=Avenir, sans-serif
+    &--color-rgb=29, 30, 60
+    &--background-color-rgb=239, 239, 239
+    &--accent-color-rgb=74, 76, 105
+">
+
+<style>
+  html {
+    --font-size: calc(1em + .5vw);
+  }
+
+  body {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 1.5vh;
+  }
+
+  table {
+    font-family: var(--monospace-font-family);
+  }
+
+  td:last-child {
+    white-space: pre;
+    text-align: right;
+    padding-left: 1em;
+  }
+
+  .Button {
+    padding: .25em .6em;
+  }
+</style>
+
+<div class="Stack">
+  <table>
+    <tr><td>setIntervals<td id=intervalEl>  0</tr>
+    <tr><td>setIntervalsVisible<td id=intervalsVisibleEl>  0</tr>
+    <tr><td><td id=difference>  0</tr>
+  </table>
+
+  <center>
+    <button id=button class="Button Button-is-primary Button-is-elevated" autofocus>Clear</button>
+  </center>
+</div>
+
+<script type="module">
+  import setIntervalVisible from "./index.js"
+
+  let intervals = 0
+  let intervalsVisible = 0
+
+  const render = () => {
+    const pad = num => num.toString().padStart(3, " ")
+    intervalEl.textContent = pad(intervals)
+    intervalsVisibleEl.textContent = pad(intervalsVisible)
+
+    const diff = intervalsVisible - intervals
+    const sign = diff > 0 ? "+" : diff < 0 ? "-" : " "
+    difference.textContent = pad(sign + Math.abs(diff))
+  }
+
+  const interval = setInterval(() => render(intervals++), 1000)
+  const intervalVisible = setIntervalVisible(() => render(intervalsVisible++), 1000)
+
+  let cleared = false
+  button.addEventListener("click", () => {
+    if (cleared) return location.reload()
+    intervalVisible.clear()
+    clearInterval(interval)
+    button.textContent = "Run again"
+    cleared = true
+  })
+</script>
