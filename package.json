@@ -1,6 +1,6 @@
 {
   "name": "set-interval-visible",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Run a setInterval that temporarily pauses when the page is not visible.",
   "main": "index.js",
   "repository": {

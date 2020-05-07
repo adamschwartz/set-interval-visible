@@ -1,21 +1,21 @@
 export const setIntervalVisible = (callback, ms) => {
-  let stop = false
+  let timeout
 
   const next = () => {
-    if (stop) return
-
-    setTimeout(() => {
+    timeout = setTimeout(() => {
       requestAnimationFrame(() => {
         callback()
         next()
       })
-    }, ms - 10)
+    }, ms)
   }
 
   next()
 
   return {
-    clear: () => stop = true
+    clear: () => {
+      clearTimeout(timeout)
+    }
   }
 }
 
